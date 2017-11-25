@@ -6,12 +6,13 @@ namespace VaildBracesTest
     [TestFixture]
     public class VaildBracesTest
     {
-        [TestCase("[",TestName = "input one char should return false")]
-        [TestCase("[{",TestName = "input two char but not match braces should return false")]
-        public void TestMethod1(string input)
+        [TestCase("[",false,TestName = "input one char should return false")]
+        [TestCase("[{", false, TestName = "input two char but not match braces should return false")]
+        [TestCase("[{}]", true, TestName = "input  match braces [{}] should return true")]
+        public void TestMethod1(string input, bool expected)
         {
             var result = VaildBraces(input);
-            Assert.AreEqual(false, result);
+            Assert.AreEqual(expected, result);
         }
 
         public bool VaildBraces(string input)
