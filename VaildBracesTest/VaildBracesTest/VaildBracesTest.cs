@@ -9,14 +9,18 @@ namespace VaildBracesTest
         [Test]
         public void TestMethod1()
         {
-            var input="[";
+            var input = "[";
             var result = VaildBraces(input);
-            Assert.AreEqual(false,result);
+            Assert.AreEqual(false, result);
         }
 
         private bool VaildBraces(string input)
         {
-            throw new NotImplementedException();
+            if (input.Length < 2)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
