@@ -6,10 +6,10 @@ namespace VaildBracesTest
     [TestFixture]
     public class VaildBracesTest
     {
-        [Test]
-        public void TestMethod1()
+        [TestCase("[",TestName = "input one char should return false")]
+        [TestCase("[{",TestName = "input not match braces should return false")]
+        public void TestMethod1(string input)
         {
-            var input = "[";
             var result = VaildBraces(input);
             Assert.AreEqual(false, result);
         }
