@@ -6,15 +6,16 @@ namespace VaildBracesTest
     {
         public bool VaildBraces(string input)
         {
-            if (input.Length % 2 != 0)
+            if (LenIsNotVaild(input))
             {
                 return false;
             }
+            
             var starIndex = 0;
             var endIndex = input.Length - 1;
             for (; starIndex < endIndex; starIndex++, endIndex--)
             {
-                if (!CheckBraceIsMatch(input, starIndex, endIndex))
+                if (!BraceIsMatch(input, starIndex, endIndex))
                 {
                     return false;
                 }
@@ -22,15 +23,20 @@ namespace VaildBracesTest
             return true;
         }
 
-        private static bool CheckBraceIsMatch(string input, int starIndex, int endIndex)
+        private static bool LenIsNotVaild(string input)
         {
-            var Brace = new Dictionary<char, char>
+            return input.Length % 2 != 0;
+        }
+
+        private static bool BraceIsMatch(string input, int starIndex, int endIndex)
+        {
+            var braces = new Dictionary<char, char>
             {
                 { '[',']'},
                 { '(',')'},
                 { '{','}'}
             };
-            return Brace[input[starIndex]] == input[endIndex];
+            return braces[input[starIndex]] == input[endIndex];
         }
     }
 }
