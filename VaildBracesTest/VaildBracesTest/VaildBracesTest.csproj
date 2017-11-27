@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="VaildBracesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VaildHelper.cs" />
+    <Compile Include="Brace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
