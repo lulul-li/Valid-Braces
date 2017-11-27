@@ -1,54 +1,42 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace VaildBracesTest
 {
     public class VaildHelper
     {
-        private static readonly Dictionary<char, char> BracketsDictionary = new Dictionary<char, char>
-        {
-            { '[',']'},
-            { '(',')'},
-            { '{','}'}
-        };
-
-
         public bool VaildBraces(string input)
         {
             if (LenIsNotVaild(input))
             {
                 return false;
             }
-
-            var bracketsStack = new List<char>();
-            for (var index = 0; index < input.Length; index++)
+            
+            var starIndex = 0;
+            var endIndex = input.Length - 1;
+            for (; starIndex < endIndex; starIndex++, endIndex--)
             {
-                AddFirstBracket(input, index, bracketsStack);
-                RemoveMatchBraces(input, index, bracketsStack);
+                if (!BraceIsMatch(input, starIndex, endIndex))
+                {
+                    return false;
+                }
             }
-
-            return bracketsStack.Count == 0;
-        }
-
-        private static void AddFirstBracket(string input, int i, List<char> stack)
-        {
-            if (BracketsDictionary.ContainsKey(input[i]))
-            {
-                stack.Add(input[i]);
-            }
-        }
-
-        private static void RemoveMatchBraces(string input, int i, List<char> stack)
-        {
-            if (BracketsDictionary[stack[stack.Count - 1]] == input[i])
-            {
-                stack.RemoveAt(stack.Count - 1);
-            }
+            return true;
         }
 
         private static bool LenIsNotVaild(string input)
         {
             return input.Length % 2 != 0;
+        }
+
+        private static bool BraceIsMatch(string input, int starIndex, int endIndex)
+        {
+            var braces = new Dictionary<char, char>
+            {
+                { '[',']'},
+                { '(',')'},
+                { '{','}'}
+            };
+            return braces[input[starIndex]] == input[endIndex];
         }
     }
 }
