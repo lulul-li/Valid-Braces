@@ -13,6 +13,7 @@ namespace VaildBracesTest
         [TestCase("[{}][]", true, TestName = "input  match braces [{}][] should return true")]
         [TestCase(")(}{][", false, TestName = "input  )(}{][ should return false")]
         [TestCase("())({}}{()][][", false, TestName = "input ())({}}{()][][ should return false")]
+        [TestCase("}}}]]", false, TestName = "input ())({}}{()][][ should return false")]
         public void VaildBracesReturnIsCorrect(string input, bool expected)
         {
             var result = new Brace(input).VaildBraces();

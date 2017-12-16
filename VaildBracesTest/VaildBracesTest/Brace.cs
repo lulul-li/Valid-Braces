@@ -29,29 +29,19 @@ namespace VaildBracesTest
             }
 
             var bracketsStack = new Stack<char>();
-            for (var index = 0; index < _input.Length; index++)
+            foreach (char i in _input)
             {
-                AddFirstBracket(index, bracketsStack);
-                RemoveMatchBraces(index, bracketsStack);
+                if (BracketsDictionary.ContainsKey(i))
+                {
+                    bracketsStack.Push(i);
+                }
+                else if (bracketsStack.Any() && BracketsDictionary[bracketsStack.Peek()] == i)
+                {
+                    bracketsStack.Pop();
+                }
             }
 
             return bracketsStack.Count == 0;
-        }
-
-        private static void AddFirstBracket(int i, Stack<char> stack)
-        {
-            if (BracketsDictionary.ContainsKey(_input[i]))
-            {
-                stack.Push(_input[i]);
-            }
-        }
-
-        private static void RemoveMatchBraces(int i, Stack<char> stack)
-        {
-            if (stack.Any() && BracketsDictionary[stack.Peek()] == _input[i])
-            {
-                stack.Pop();
-            }
         }
 
         private static bool LenIsNotVaild()
